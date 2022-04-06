@@ -27,7 +27,7 @@ public class EarthMCAPI {
     public static CompletableFuture<JsonArray> getTownless() {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                return (JsonArray) JsonParser.parseString(getURL(getRoute(APIRoute.TOWNLESS)));
+                return (JsonArray) new JsonParser().parse(getURL(getRoute(APIRoute.TOWNLESS)));
             } catch (APIException e) {
                 MsgUtils.sendDebugMessage(e.getMessage(), e);
                 return new JsonArray();
@@ -49,7 +49,7 @@ public class EarthMCAPI {
                     if (!player.getEntityWorld().getDimension().isBedWorking())
                         return new JsonArray();
 
-                    JsonArray array = (JsonArray) JsonParser.parseString(getURL(getRoute(APIRoute.NEARBY) +
+                    JsonArray array = (JsonArray) new JsonParser().parse(getURL(getRoute(APIRoute.NEARBY) +
                             (int) player.getX() + "/" +
                             (int) player.getZ() + "/" +
                             xBlocks + "/" + zBlocks));
@@ -72,7 +72,7 @@ public class EarthMCAPI {
     public static CompletableFuture<Resident> getResident(String residentName) {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                return new Resident((JsonObject) JsonParser.parseString(getURL(getRoute(APIRoute.RESIDENTS) + residentName)));
+                return new Resident((JsonObject) new JsonParser().parse(getURL(getRoute(APIRoute.RESIDENTS) + residentName)));
             } catch (APIException e) {
                 MsgUtils.sendDebugMessage(e.getMessage(), e);
                 return new Resident(residentName);
@@ -83,7 +83,7 @@ public class EarthMCAPI {
     public static CompletableFuture<JsonArray> getTowns() {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                return (JsonArray) JsonParser.parseString(getURL(getRoute(APIRoute.TOWNS)));
+                return (JsonArray) new JsonParser().parse(getURL(getRoute(APIRoute.TOWNS)));
             } catch (APIException e) {
                 MsgUtils.sendDebugMessage(e.getMessage(), e);
                 return new JsonArray();
@@ -94,7 +94,7 @@ public class EarthMCAPI {
     public static CompletableFuture<ServerData> getServerData() {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                return new ServerData((JsonObject) JsonParser.parseString(getURL(getRoute(APIRoute.SERVER_INFO))));
+                return new ServerData((JsonObject) new JsonParser().parse(getURL(getRoute(APIRoute.SERVER_INFO))));
             } catch (APIException e) {
                 MsgUtils.sendDebugMessage(e.getMessage(), e);
                 return new ServerData();
@@ -105,7 +105,7 @@ public class EarthMCAPI {
     public static CompletableFuture<JsonArray> getNations() {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                return (JsonArray) JsonParser.parseString(getURL(getRoute(APIRoute.NATIONS)));
+                return (JsonArray) new JsonParser().parse(getURL(getRoute(APIRoute.NATIONS)));
             } catch (APIException e) {
                 MsgUtils.sendDebugMessage(e.getMessage(), e);
                 return new JsonArray();
@@ -116,7 +116,7 @@ public class EarthMCAPI {
     public static CompletableFuture<NewsData> getNews() {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                return new NewsData((JsonObject) JsonParser.parseString(getURL(getRoute(APIRoute.NEWS))));
+                return new NewsData((JsonObject) new JsonParser().parse(getURL(getRoute(APIRoute.NEWS))));
             } catch (APIException e) {
                 MsgUtils.sendDebugMessage(e.getMessage(), e);
                 return new NewsData();
@@ -127,7 +127,7 @@ public class EarthMCAPI {
     public static CompletableFuture<APIData> API() {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                return new APIData((JsonObject) JsonParser.parseString(
+                return new APIData((JsonObject) new JsonParser().parse(
                     getURL("https://raw.githubusercontent.com/EarthMC-Stats/EarthMCEssentials" +
                            "/main/src/main/resources/api.json")));
             } catch (APIException e) {
